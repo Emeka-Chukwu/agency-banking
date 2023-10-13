@@ -9,6 +9,6 @@ import domain "agency-banking/domain/auths"
 // // @Param id path int true "User ID"
 // @Success 201 {object} domain.LoginResp
 // @Router /auths/register [post]
-func (*authusace) Register(domain.Login) domain.LoginResp {
+func (*authusace) Register(domain.Login) (domain.LoginResp, error) {
 	panic("unimplemented")
 }

@@ -1,6 +1,7 @@
 package server
 
 import (
+	auth_handler "agency-banking/internal/auths/https"
 	"agency-banking/pkg/token"
 	"agency-banking/util"
 	"fmt"
@@ -44,8 +45,12 @@ func (s *Server) StartGin(address string) error {
 //// here
 
 func (s *Server) setupRoutes() {
-	s.ChiRouter.Get("/doc/swagger", httpSwagger.WrapHandler)
+
+	s.ChiRouter.Get("/swagger/*", httpSwagger.Handler(
+		httpSwagger.URL("cmd/docs/swagger.json"), // Point to your generated Swagger JSON
+	))
 	s.ChiRouter.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(fmt.Sprintf("agency banking api running at : %s", s.Config.HTTPServerAddress)))
 	})
+	auth_handler.NewAuthHandler(s.ChiRouter, nil, s.Config)
 }

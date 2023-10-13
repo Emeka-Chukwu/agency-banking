@@ -7,8 +7,8 @@ import (
 )
 
 type Authuscase interface {
-	Login(domain.Login) domain.LoginResp
-	Register(domain.Login) domain.LoginResp
+	Login(domain.Login) (domain.LoginResp, error)
+	Register(domain.Login) (domain.LoginResp, error)
 }
 
 type authusace struct {
