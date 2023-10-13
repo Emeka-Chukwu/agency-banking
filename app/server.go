@@ -44,7 +44,7 @@ func (s *Server) StartGin(address string) error {
 //// here
 
 func (s *Server) setupRoutes() {
-	s.ChiRouter.Mount("/doc/swagger", httpSwagger.WrapHandler)
+	s.ChiRouter.Get("/doc/swagger", httpSwagger.WrapHandler)
 	s.ChiRouter.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(fmt.Sprintf("agency banking api running at : %s", s.Config.HTTPServerAddress)))
 	})
