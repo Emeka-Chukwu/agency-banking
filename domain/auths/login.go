@@ -12,12 +12,13 @@ type Login struct {
 }
 
 type User struct {
-	Email     string    `json:"email"`
-	Password  string    `json:"password"`
-	Name      string    `json:"name"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
-	ID        uuid.UUID `json:"id"`
+	Email      string    `json:"email"`
+	Password   string    `json:"password"`
+	Name       string    `json:"name"`
+	ContactIfo string    `json:"contact_info"`
+	CreatedAt  time.Time `json:"created_at"`
+	UpdatedAt  time.Time `json:"updated_at"`
+	ID         uuid.UUID `json:"id"`
 }
 
 type LoginResp struct {
