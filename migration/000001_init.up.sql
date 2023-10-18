@@ -80,15 +80,20 @@ CREATE TABLE Agents (
     Name VARCHAR(255) NOT NULL,
     Email VARCHAR(255) NOT NULL UNIQUE,
     Password VARCHAR(255) NOT NULL,
-    Contact_Info VARCHAR(255) NOT NULL
+    Contact_Info VARCHAR(255) NOT NULL,
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 
 -- Create Agent_Accounts Table with UUID as the primary key
 CREATE TABLE Accounts (
     ID UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     Agent_ID UUID NOT NULL,
     Balance DECIMAL(10, 2) DEFAULT 0.0,
-    FOREIGN KEY (Agent_ID) REFERENCES Agents(ID)
+    FOREIGN KEY (Agent_ID) REFERENCES Agents(ID),
+      Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Create POS_Terminals Table with UUID as the primary key
@@ -97,7 +102,10 @@ CREATE TABLE POS_Terminals (
     Serial_Number VARCHAR(255) NOT NULL,
     Agent_ID UUID NOT NULL,
     Status VARCHAR(255) NOT NULL,
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (Agent_ID) REFERENCES Agents(ID)
+    
 );
 
 -- Create Transactions Table with UUID as the primary key
@@ -109,20 +117,27 @@ CREATE TABLE Transactions (
     Status VARCHAR(255) NOT NULL,
     Agent_ID UUID NOT NULL,
     Transaction_Description VARCHAR(255),
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (Agent_ID) REFERENCES Agents(ID)
+
 );
 
 -- Create Charges Table with UUID as the primary key
 CREATE TABLE Charges (
     ID UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     Transaction_Type VARCHAR(255) NOT NULL,
-    Percentage DECIMAL(5, 2) NOT NULL
+    Percentage DECIMAL(5, 2) NOT NULL,
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Create Company_Account Table with UUID as the primary key
 CREATE TABLE Company_Account (
     Account_ID UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    Balance DECIMAL(10, 2) DEFAULT 0.0 NOT NULL
+    Balance DECIMAL(10, 2) DEFAULT 0.0 NOT NULL,
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Create Transaction_Processing Table with UUID as the primary key
@@ -131,6 +146,8 @@ CREATE TABLE Transaction_Processing (
     Transaction_ID UUID NOT NULL,
     Transaction_Reference VARCHAR(255) NOT NULL,
     Status varchar(255) NOT NULL,
-    FOREIGN KEY (Transaction_ID) REFERENCES Transactions(ID)
+    FOREIGN KEY (Transaction_ID) REFERENCES Transactions(ID),
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
