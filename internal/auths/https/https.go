@@ -63,7 +63,7 @@ func (ah AuthsHandler) Login(w http.ResponseWriter, r *http.Request) {
 // @Success 201 {object} domain.LoginResp
 // @Router /auths/register [post]
 func (ah AuthsHandler) Register(w http.ResponseWriter, r *http.Request) {
-	var req domain.Login
+	var req domain.User
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		return

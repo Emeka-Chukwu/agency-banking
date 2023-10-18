@@ -28,5 +28,5 @@ server:
 	go run main.go
 
 mock:
-	mockgen -package mockdb -destination db/mock/store.go simplebank/db/sqlc Store
-	mockgen -package mockwk -destination worker/mock/distributor.go simplebank/worker TaskDistributor
+	mockgen -package mockdb -destination internal/auths/repository/mock/store.go go-task/internal/auths/repository/postgres AuthRepository
+	mockgen -package mockdb -destination internal/auths/usecase/mock/store.go go-task/internal/auths/usecase Authusecase 

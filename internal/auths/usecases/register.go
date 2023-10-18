@@ -1,6 +1,9 @@
 package usecases_handler
 
-import domain "agency-banking/domain/auths"
+import (
+	domain "agency-banking/domain/auths"
+	"agency-banking/util"
+)
 
 // @Summary Register User
 // @Description register and assign a valid token to user
@@ -9,6 +12,21 @@ import domain "agency-banking/domain/auths"
 // // @Param id path int true "User ID"
 // @Success 201 {object} domain.LoginResp
 // @Router /auths/register [post]
-func (*authusace) Register(domain.Login) (domain.LoginResp, error) {
-	panic("unimplemented")
+func (auth *authusace) Register(req domain.User) (domain.LoginResp, error) {
+	hashPassword, err := util.HashPassword(req.Password)
+	if err != nil {
+		return domain.LoginResp{}, err
+	}
+	req.Password = hashPassword
+	user, err := auth.Register(req)
+	if err != nil {
+		return domain.LoginResp{}, err
+	}
+	token, payload, err := auth.TokenMaker.CreateToken(user.ID, auth.Config.AccessTokenDuration)
+
+	return domain.LoginResp{
+		Token:     token,
+		User:      user.User,
+		ExpiredAt: payload.ExpiredAt,
+	}, err
 }
