@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func newTestUsecase(t *testing.T, store repo.AuthRepository) Authuscase {
+func newTestUsecase(t *testing.T, store repo.AuthRepository) Authusecase {
 	config := util.Config{
 		TokenSymmetricKey:   util.RandomString(32),
 		AccessTokenDuration: time.Minute,

@@ -7,7 +7,7 @@ import (
 	"agency-banking/util"
 )
 
-type Authuscase interface {
+type Authusecase interface {
 	Login(data domain.Login) (domain.LoginResp, error)
 	Register(data domain.User) (domain.LoginResp, error)
 }
@@ -18,7 +18,7 @@ type authusace struct {
 	Store      repo.AuthRepository
 }
 
-func NewAuthusecase(token token.Maker, config util.Config, auth repo.AuthRepository) Authuscase {
+func NewAuthusecase(token token.Maker, config util.Config, auth repo.AuthRepository) Authusecase {
 	return &authusace{Config: config, TokenMaker: token, Store: auth}
 }
 

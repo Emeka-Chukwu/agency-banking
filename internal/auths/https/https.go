@@ -12,7 +12,7 @@ import (
 )
 
 func NewAuthHandler(ChiRouter *chi.Mux,
-	usecase usecases_handler.Authuscase,
+	usecase usecases_handler.Authusecase,
 	Config util.Config) {
 	handler := AuthsHandler{usecase: usecase, Config: Config, ChiRouter: ChiRouter}
 	ChiRouter.Route("/auths", func(r chi.Router) {
@@ -27,7 +27,7 @@ func NewAuthHandler(ChiRouter *chi.Mux,
 
 type AuthsHandler struct {
 	ChiRouter *chi.Mux
-	usecase   usecases_handler.Authuscase
+	usecase   usecases_handler.Authusecase
 	Config    util.Config
 }
 
